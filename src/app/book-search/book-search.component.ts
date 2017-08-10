@@ -28,9 +28,7 @@ export class BookSearchComponent implements OnInit {
   }
 
   searchChanged(value: string){
-  //update disabled property depends on value
   if (value){
-    console.log(value);
     this.disabled = false;
   } else {
     this.disabled = true;

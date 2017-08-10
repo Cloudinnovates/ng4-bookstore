@@ -33,6 +33,7 @@ export class CartService {
         }
         this.cart.count--;
         this.cart.amount -= book.price;
+        item.amount -= book.price;
       }
       return item;
     }

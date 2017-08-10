@@ -10,7 +10,7 @@ import { CartService } from '../cart.service';
 })
 export class CheckoutViewComponent implements OnInit {
 
-  private cart: Cart;
+  cart: Cart;
   form: FormGroup;
 
   constructor(private cartService: CartService, private fb: FormBuilder) {

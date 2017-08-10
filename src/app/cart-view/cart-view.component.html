@@ -20,7 +20,7 @@
                                                 [ngModel]="item.count"
                                                 (ngModelChange)="item.count = update($event, item)">-->
                                         <input type="number" name="{{item.book.id}}" min="1"
-                                          [(ngModel)]="item.count">
+                                          [(ngModel)]="item.count" readonly>
                                     </td>
                                     <td>{{item.amount | currency:'EUR':true:'1.2-2'}}</td>
                                 </tr>
@@ -44,7 +44,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <a class="btn btn-danger btn-block" [routerLink]="['/checkout']">Checkout</a>
-                                <a class="btn btn-primary btn-block" [routerLink]="['/books']">Continue Shopping</a>
+                                <a class="btn btn-primary btn-block" [routerLink]="['/books']">Continue Viewing</a>
                             </div>
                         </div>
                         <div class="form-group row">

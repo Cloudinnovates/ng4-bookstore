@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Category } from '../models/category';
 
 import { CategoryService } from '../category.service';
@@ -7,28 +7,19 @@ import { CategoryService } from '../category.service';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
 
-    constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService) {
 
-    }
+  }
 
-    sliderCategories: Category[];
-    cardCategories: Category[];
+  sliderCategories: Category[] = [this.categoryService.getCategory('2'), this.categoryService.getCategory('3'),
+    this.categoryService.getCategory('1')];
 
-    ngOnInit() {
-      this.categoryService.getCategories().then((categories: Category[]) => {
-        this.cardCategories = categories;
-        this.sliderCategories = [
-            categories[1],
-            categories[2],
-            categories[3]
-        ];
-      });
-    }
+  cardCategories: Category[] = this.categoryService.getCategories();
 
-    selectCategory(category: Category) {
-      console.log('Selected category', category.title);
-    }
+  selectCategory(category: Category) {
+    console.log('Selected category', category.title);
+  }
 
 }
