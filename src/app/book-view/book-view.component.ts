@@ -33,7 +33,7 @@ export class BookViewComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: any) => {
       let id: string = params['id'];
-      this.bookService.getBook(id).then((book: Book) => this.book = book);
+      this.bookService.getBook(id).subscribe((book: Book) => this.book = book);
       this.cartItem = this.cartService.findItem(id);
     });
   }

@@ -1,9 +1,13 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Book } from '../models/books';
 import { BookService } from '../book.service';
 import { CartService } from '../cart.service';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'app-book-grid',
@@ -11,19 +15,19 @@ import { CartService } from '../cart.service';
   styleUrls: ['./book-grid.component.css']
 })
 export class BookGridComponent implements OnInit {
-    books: any = [];
+    books: Observable<Book[][]>;
 
     constructor(private route: ActivatedRoute, private bookService: BookService, private cartService: CartService) {
     }
 
-    ngOnInit() {
-      this.route.queryParams.subscribe((params: any) => {
+    ngOnInit(): void {
+      this.route.queryParams
+            .debounceTime(300)
+            .distinctUntilChanged()
+            .subscribe((params: any) => {
               let category: string = params['category'];
               let search: string = params['search'];
-              this.books = [];
-              this.bookService.getBooks(category, search).then((books: Book[]) => {
-                this.books = this.transform(books);
-              });
+              this.books = this.bookService.getBooks(category, search).map(this.transform);
       });
     }
 

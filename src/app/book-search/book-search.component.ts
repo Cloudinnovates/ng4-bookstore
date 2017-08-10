@@ -23,7 +23,7 @@ export class BookSearchComponent implements OnInit {
    });
  }
 
-  searchBook(value: string){
+  searchBooks(value: string){
     this.router.navigate(['/books'], {queryParams: {search: value }});
   }
 

@@ -4,9 +4,9 @@
   </div>
     <div class="input-group">
       <input #search type="text" class="form-control" placeholder="Search for ..."
-      [formControl]="searchControl" (keyup)="searchChanged(search.value)">
+      [formControl]="searchControl" (keyup)="searchBooks(search.value)">
       <span class="input-group-btn">
-        <button class="btn btn-primary" (click)="searchBook(search.value)"
+        <button class="btn btn-primary" (click)="searchBooks(search.value)"
         [disabled]="disabled" type="button">Go!</button>
       </span>
     </div>

@@ -1,8 +1,8 @@
 <div class="card">
     <img class="card-img-top img-fluid mx-auto d-block product-item" src="{{category.imageSmall}}" alt="{{category.title}}">
     <div class="card-block">
-      <h4 class="card-title">{{category.title}}</h4>
-      <p class="card-text">{{category.description}}</p>
+      <h4 class="card-title">{{category?.title}}</h4>
+      <p class="card-text">{{category?.description}}</p>
           <button class="btn btn-primary" (click)="filterBooks(category)">Browse</button>
     </div>
   </div>

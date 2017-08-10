@@ -20,9 +20,9 @@ export class WelcomeComponent implements OnInit {
       this.categoryService.getCategories().then((categories: Category[]) => {
         this.cardCategories = categories;
         this.sliderCategories = [
-            categories[5],
-            categories[4],
-            categories[6]
+            categories[1],
+            categories[2],
+            categories[3]
         ];
       });
     }

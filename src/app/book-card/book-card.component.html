@@ -2,19 +2,19 @@
   <div class="card-deck">
     <div class="card" *ngFor="let book of books">
       <div class="card-header text-xs-center">
-          {{book.title}}
+          {{book?.title}}
       </div>
       <img class="card-img-top mx-auto d-block product-item"
-       src="{{book.imageSmall}}" alt="{{book.title}}">
+       src="{{book?.imageSmall}}" alt="{{book?.title}}">
       <div class="card-block text-xs-center" [ngClass]="setClasses(book)">
-        <h4 class="card-text">Price: €{{book.price}}</h4>
+        <h4 class="card-text">Price: €{{book?.price}}</h4>
       </div>
       <div class="card-footer text-xs-center">
         <button class="btn btn-danger" (click)="buy(book)">Buy Now</button>
         <a class="btn btn-primary" [routerLink]="['/book', book.id]">More Info</a>
       </div>
       <div class="card-block">
-          <p class="card-text">{{book.description}}</p>
+          <p class="card-text">{{book?.description}}</p>
       </div>
     </div>
   </div>
