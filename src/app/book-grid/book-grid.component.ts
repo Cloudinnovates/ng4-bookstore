@@ -1,5 +1,5 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Book } from '../models/books';
 import { BookService } from '../book.service';
@@ -13,17 +13,18 @@ import { CartService } from '../cart.service';
 export class BookGridComponent implements OnInit {
     books: any = [];
 
-    constructor(private router: Router, private bookService: BookService, private cartService: CartService) {
-      this.router.routerState.root.queryParams.subscribe(params => {
-        let category: string = params['category'];
-        let search: string = params['search'];
-        let booksFound: Book[] = this.bookService.getBooks(category, search);
-        this.books = this.transform(booksFound);
-      });
+    constructor(private route: ActivatedRoute, private bookService: BookService, private cartService: CartService) {
     }
 
     ngOnInit() {
-      //this.books = this.transform(getBooks());
+      this.route.queryParams.subscribe((params: any) => {
+              let category: string = params['category'];
+              let search: string = params['search'];
+              this.books = [];
+              this.bookService.getBooks(category, search).then((books: Book[]) => {
+                this.books = this.transform(books);
+              });
+      });
     }
 
     transform(source: Book[]){

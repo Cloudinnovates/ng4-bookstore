@@ -2,8 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { LocationStrategy, HashLocationStrategy, PathLocationStrategy } from '@angular/common';
+
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -53,9 +57,11 @@ import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     ReactiveFormsModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [{provide: LocationStrategy, useClass: PathLocationStrategy},
               CategoryService, BookService, CartService],

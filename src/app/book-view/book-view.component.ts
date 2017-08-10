@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BookService } from '../book.service';
@@ -12,36 +12,39 @@ import { Cart, CartItem } from '../models/cart';
   templateUrl: './book-view.component.html',
   styleUrls: ['./book-view.component.css']
 })
-export class BookViewComponent {
+export class BookViewComponent implements OnInit {
 
-    book: Book;
-    cartItem: CartItem;
+  book: Book;
+  cartItem: CartItem;
 
-    get quantity(): number {
-      return this.cartItem ? this.cartItem.count : 0;
-    }
+  get quantity(): number {
+    return this.cartItem ? this.cartItem.count : 0;
+  }
 
-    get amount(): number {
-      return this.cartItem ? this.cartItem.amount : 0;
-    }
+  get amount(): number {
+    return this.cartItem ? this.cartItem.amount : 0;
+  }
 
 
   constructor(private route: ActivatedRoute,
-                  private bookService: BookService,
-                  private cartService: CartService) {
-                    this.route.params.subscribe((params: any) => {
-                      let id: string = params['id'];
-                      this.book = this.bookService.getBook(id);
-                      this.cartItem = this.cartService.findItem(id);
-                    });
-                }
-                addToCart($event: Event) {
-                  this.cartItem = this.cartService.addBook(this.book);
-                  $event.preventDefault();
-                }
-                removeFromCart($event: Event) {
-                  this.cartItem = this.cartService.removeBook(this.book);
-                  $event.preventDefault();
-                }
+    private bookService: BookService,
+    private cartService: CartService) {
+  }
+  ngOnInit() {
+    this.route.params.subscribe((params: any) => {
+      let id: string = params['id'];
+      this.bookService.getBook(id).then((book: Book) => this.book = book);
+      this.cartItem = this.cartService.findItem(id);
+    });
+  }
+
+  addToCart($event: Event) {
+    this.cartItem = this.cartService.addBook(this.book);
+    $event.preventDefault();
+  }
+  removeFromCart($event: Event) {
+    this.cartItem = this.cartService.removeBook(this.book);
+    $event.preventDefault();
+  }
 
 }
