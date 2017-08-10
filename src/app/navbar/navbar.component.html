@@ -1,0 +1,16 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar" aria-controls="exCollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+    <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+      <div class="nav navbar-nav">
+        <a class="navbar-brand" [routerLink]="['/welcome']">{{title}}</a>
+        <a class="nav-item nav-link" [routerLink]="['/books']">Books</a>
+        <a class="nav-item nav-link" [routerLink]="['/checkout']">Checkout</a>
+        <a class="nav-item nav-link" href="">Logout</a>
+      </div>
+    </div>
+    <app-cart-menu></app-cart-menu>
+  </div>
+</nav>

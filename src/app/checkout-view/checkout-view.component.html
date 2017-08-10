@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="form">
+        <div class="form-group row">
+          <label for="firstName" class="col-2 col-form-label">First Name:</label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="" id="firstName" formControlName="firstName">
+            <p [hidden]="form.controls.firstName.valid || form.controls.firstName.pristine" class="form-text alert-danger">
+              First Name is required
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="lastName" class="col-2 col-form-label">Last Name:</label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="" id="lastName" formControlName="lastName">
+            <p [hidden]="form.controls.lastName.valid || form.controls.lastName.pristine" class="form-text alert-danger">
+              Last Name is required
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-2 col-form-label">Email:</label>
+          <div class="col-10">
+            <input class="form-control" type="email" value="" id="email" formControlName="email">
+            <p [hidden]="form.controls.email.valid || form.controls.email.pristine" class="form-text alert-danger">
+              Email is required
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="phone" class="col-2 col-form-label">Phone:</label>
+          <div class="col-10">
+            <input class="form-control" type="phone" value="" id="phone" formControlName="phone">
+            <p [hidden]="form.controls.phone.valid || form.controls.phone.pristine" class="form-text alert-danger">
+              Phone is required
+            </p>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="address" class="col-2 col-form-label">Address:</label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="" id="address" formControlName="address">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label for="order" class="col-3 form-control-label">Order</label>
+            <div class="col-9">
+              <h4 class="form-control-static">10000000001</h4>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="amount" class="col-3 form-control-label">Amount</label>
+            <div class="col-9">
+              <h4 class="form-control-static">{{cart.amount | currency:'EUR':true:'1.2-2'}}</h4>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group row">
+            <div class="col-12">
+              <p>The best source for learning Angular is the documentation.
+              It is a dream. The best source for learning JavaScript is Mozilla Developer Network. Then search for
+              Angular on Github and find some sample code and projects to reproduce. Finally check out the Angular source
+            code if you are interested to learn how this awesome framework functions under the hood. We must learn the technology
+            forwards and backwards. Happy Learning and Coding. Have Fun!</p>
+            </div>
+          </div>
+          <div class="form-group row">
+              <div class="col-3">
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" value="">
+                    Accept
+                  </label>
+                </div>
+              </div>
+              <div class="col-9">
+                <button class="btn btn-danger" (click)="submit()" [disabled]="!form.valid">Submit</button>
+                <button class="btn btn-success" [routerLink]="['/books']">Continue Viewing</button>
+              </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
