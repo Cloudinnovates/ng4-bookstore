@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Navigation } from '../models/navigation';
+
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +12,15 @@ import { Navigation } from '../models/navigation';
 })
 export class NavbarComponent {
   title: string = 'NG4 Bookstore';
+
+  constructor(public authenticationService: AuthenticationService, private router: Router) {
+
+  }
+
+  logOut() {
+    this.authenticationService.signOut();
+    this.router.navigateByUrl('/login');
+  }
 
   navigationItems: Navigation[] = [
     {href: '#', label: 'Home', active: true},

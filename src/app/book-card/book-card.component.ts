@@ -1,12 +1,11 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Book } from '../models/books';
 
 @Component({
   selector: 'app-book-card',
   templateUrl: './book-card.component.html',
-  styleUrls: ['./book-card.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./book-card.component.css']
 })
 export class BookCardComponent {
   @Input() books: Book[];

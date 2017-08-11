@@ -1,0 +1,64 @@
+$text-color: #fff;
+$primary: #fff;
+$primary-dark: #777;
+$black: #000;
+$font-light: 300;
+
+.authenticate-main {
+  align-items: center;
+  height: 80%;
+  width: 60%;
+  margin-left: 35%;
+
+  .authenticate-block {
+    border-radius: 30px;
+    background-color: $black;
+    color: #fff;
+    padding: 32px;
+
+    h1 {
+        font-weight: $font-light;
+        margin-bottom: 28px;
+        text-align: center;
+    }
+
+    .authenticate-link {
+        display: block;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 33px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    a {
+        text-decoration: none;
+        outline: none;
+        transition: all 0.2s ease;
+        color: $primary;
+        &:hover {
+            color: $primary-dark;
+        }
+    }
+
+    .control-label {
+        padding-top: 8px;
+        color: $text-color;
+    }
+
+    a.forgot-password {
+        display: block;
+        text-align: right;
+        margin-top: 8px;
+        float: right;
+        z-index: 2;
+        position: relative;
+    }
+
+    .btn-authenticate {
+        color: #000!important;
+    }
+  }
+}

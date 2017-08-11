@@ -12,7 +12,7 @@ import { Cart, CartItem } from '../models/cart';
   templateUrl: './book-view.component.html',
   styleUrls: ['./book-view.component.css']
 })
-export class BookViewComponent  {
+export class BookViewComponent implements OnInit  {
 
   book: Book;
   cartItem: CartItem;
@@ -27,13 +27,16 @@ export class BookViewComponent  {
 
   constructor(private route: ActivatedRoute,
     private bookService: BookService,
-    private cartService: CartService) {
+    private cartService: CartService) { }
+
+  ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      let id: string = params['id'];
-      this.book = this.bookService.getBook(id);
-      this.cartItem = this.cartService.findItem(id);
+        let id: string = params['id'];
+        this.bookService.getBook(id).subscribe((book: Book) => this.book = book);
+        this.cartItem = this.cartService.findItem(id);
     });
   }
+
   addToCart($event: Event) {
     this.cartItem = this.cartService.addBook(this.book);
     $event.preventDefault();

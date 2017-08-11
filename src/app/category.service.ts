@@ -1,33 +1,35 @@
 import { Injectable } from '@angular/core';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 import { Category } from './models/category';
 
 @Injectable()
 export class CategoryService {
-  private categories: Category[] = [
-    { id: '1', title: 'Angular 1', imageLarge: './assets/imgs/ng1L.jpg', imageSmall: './assets/imgs/ng1S.png', description: 'SUPERHEROIC JavaScript MV* Framework: Controllers, Directives, Services, Scope, Data Binding, Dependency Injection, Templates.' },
-    { id: '2', title: 'Angular 2', imageLarge: './assets/imgs/ng2L.png', imageSmall: './assets/imgs/ng2S.jpg', description: 'One Framework. Mobile & desktop. Progressive Web Apps, Native, Desktop, Code Generation, Universal, Code Splitting, Components, Modules, Services.' },
-    { id: '3', title: 'Angular 4', imageLarge: './assets/imgs/ng4L.jpg', imageSmall: './assets/imgs/ng4S.png', description: 'The newest version of Angular. Templates, Angular CLI, IDEs, Testing, Animations, Accessibility, Components, Modules, Templates, Metadata, Data Binding.' },
-    { id: '4', title: 'JavaScript', imageLarge: './assets/imgs/ng1L.jpg', imageSmall: './assets/imgs/js1S.png', description: 'Scoping, Arrow Functions, Extended Parameter Handling, Template Literals, Enhanced Regular Expressions and Object Properties, Destructuring, Modules, Classes, Symbol, Iterators, Generators, Map, Typed Arrays.' },
-    { id: '5', title: 'HTML5', imageLarge: './assets/imgs/ng2L.png', imageSmall: './assets/imgs/html51S.jpg', description: 'New Semantic/Structural Elements, New Form Elements, New Input Types, New Attribute Syntax, New Graphics, New Media Elements, Video, Audio, Canvas, SVG, Date, Email, Number, Search, AutoComplete, Summary, Progress.' },
-    { id: '6', title: 'CSS3', imageLarge: './assets/imgs/ng4L.jpg', imageSmall: './assets/imgs/css31S.png', description: 'Media Queries, Selectors Level 3, Grid Template Layout, Aural Style Sheets, Backrgrounds and Borders, Basic User Interface, Extended Box Model, Marquee, Cascading, Inheritance, Color, Fonts, Transforms, Transitions, Animations.' }
-  ];
+  private categoriesUrl= 'categories';
+  private categories: Category[] = [];
 
-  getCategories() {
-      return this.categories;
+  constructor(private af: AngularFire ) {
   }
 
-  getCategory(id: string): Category {
+  getCategories(): Observable<Category[]> {
+      return this.af.database.list(this.categoriesUrl).catch(this.handleError)
+  }
+
+  getCategory(id: string) {
     for (let i = 0; i < this.categories.length; i++) {
       if (this.categories[i].id === id) {
         return this.categories[i];
       }
     }
-    throw new CategoryNotFoundException;
+    return null;
   }
-}
 
-class CategoryNotFoundException extends Error {
-               constructor(message?: string) {
-                 super(message);
+  private handleError(error: any): Observable<any> {
+    let errorMessage = (error) ? error.message : 'Server Error';
+    window.alert(`Error occurred: ${errorMessage}`);
+    return Observable.throw(errorMessage);
   }
 }

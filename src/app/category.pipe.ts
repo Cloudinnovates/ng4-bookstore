@@ -9,6 +9,6 @@ export class CategoryTitlePipe implements PipeTransform {
 
           transform(value: string): string {
             let category: Category = this.categoryService.getCategory(value);
-            return category ? category.title : '';
+            return category ? category.title : 'Angular Global';
           }
 }

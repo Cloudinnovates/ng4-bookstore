@@ -6,11 +6,11 @@
     <div class="collapse navbar-collapse" id="exCollapsingNavbar">
       <div class="nav navbar-nav">
         <a class="navbar-brand" [routerLink]="['/welcome']">{{title}}</a>
-        <a class="nav-item nav-link" [routerLink]="['/books']">Books</a>
+        <a class="nav-item nav-link" [routerLink]="['/books']" [queryParams]="{category: 1 }">Books</a>
         <a class="nav-item nav-link" [routerLink]="['/checkout']">Checkout</a>
-        <a class="nav-item nav-link" [routerLink]="['/welcome']">Logout</a>
+        <a class="nav-item nav-link" (click)="logOut()" *ngIf="authenticationService.authenticated">Logout</a>
       </div>
     </div>
-    <app-cart-menu></app-cart-menu>
+    <app-cart-menu *ngIf="authenticationService.authenticated"></app-cart-menu>
   </div>
 </nav>

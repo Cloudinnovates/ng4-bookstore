@@ -6,6 +6,10 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import * as firebae from 'firebase';
+import { environment } from '../environments/environment';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CategoryCardComponent } from './category-card/category-card.component';
@@ -20,15 +24,24 @@ import { BookSearchComponent } from './book-search/book-search.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { BookCardComponent } from './book-card/book-card.component';
 import { BookGridComponent } from './book-grid/book-grid.component';
-
-import { CategoryService } from './category.service';
-import { BookService } from './book.service';
-import { CartService } from './cart.service';
 import { CartMenuComponent } from './cart-menu/cart-menu.component';
 import { BookViewComponent } from './book-view/book-view.component';
 import { CategoryTitlePipe } from './category.pipe';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
+import { LogInComponent } from './log-in/log-in.component';
+
+import { CategoryService } from './category.service';
+import { BookService } from './book.service';
+import { CartService } from './cart.service';
+import { AuthenticationService } from './authentication.service';
+import { AuthenticationGuardService } from './authentication-guard.service';
+
+
+const firebaseAuthConfig = {
+  provider: AuthProviders.Password,
+  method: AuthMethods.Redirect
+};
 
 
 @NgModule({
@@ -48,7 +61,8 @@ import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
     BookViewComponent,
     CategoryTitlePipe,
     CartViewComponent,
-    CheckoutViewComponent
+    CheckoutViewComponent,
+    LogInComponent
 
   ],
   imports: [
@@ -57,10 +71,11 @@ import { CheckoutViewComponent } from './checkout-view/checkout-view.component';
     HttpModule,
     ReactiveFormsModule,
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, firebaseAuthConfig)
   ],
   providers: [{provide: LocationStrategy, useClass: PathLocationStrategy},
-              CategoryService, BookService, CartService],
+              CategoryService, BookService, CartService, AuthenticationService, AuthenticationGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
